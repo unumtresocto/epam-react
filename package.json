@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --config webpack.config.js --watch --color",
-    "dev-server": "webpack build --config webpack.config.js --watch && webpack-dev-server --content-base build/ --color"
+    "dev-server": "webpack-dev-server --content-base build/ --color"
   },
   "repository": {
     "type": "git",
