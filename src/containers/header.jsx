@@ -7,8 +7,9 @@ export default class Header extends React.Component {
     render() {
         return (
             <header className="roulette__header">
-				netflixroulette
-				<Search></Search>
+                netflixroulette
+                <Search>
+                </Search>
             </header>
         )
     }
