@@ -184,6 +184,7 @@ ClientBin/
 *.dbmdl
 *.dbproj.schemaview
 *.pfx
+*.pdf
 *.publishsettings
 node_modules/
 orleans.codegen.cs
@@ -261,7 +262,3 @@ packages/
 **/.vs/
 
 **/project.lock.json
-ui-idportal/reports/
-ui-idportal/.vscode/
-IPMS.IDPortal.Web/Client/
-ui-idportal/src/test.gen.ts
