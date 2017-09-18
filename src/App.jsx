@@ -19,12 +19,11 @@ export default class App extends React.Component {
     search() {
         this.setState({
             movieConfigStub: {
-                coverLink: 'http://netflixroulette.net/api/posters/60031236.jpg',
-                title: 'KILL-BILL: VOL 1',
-                year: '2003',
-                genre: 'Action & Adventure',
-                rating: 4.2,
-                weirdShit: 'Oscar winning movies',
+                coverLink: 'http://netflixroulette.net/api/posters/880640.jpg',
+                title: 'Pulp Fiction',
+                year: 1994,
+                rating: 4.1,
+                genre: 'Oscar-winning movies',
                 length: '154 min',
                 description: "Weaving together three stories featuring a burger-loving" +
                              "hit man, his philosophical partner and a washed-up boxer, Quentin Tarantino" +

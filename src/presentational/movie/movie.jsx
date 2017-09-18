@@ -10,7 +10,7 @@ const Movie = ({ className, config }) => (
                 { config.title }
                 <Rating className="movie__rating rating--good" rating={ config.rating }/>
             </h2>
-            <h4 className="movie__weird-shit">{ config.weirdShit }</h4>
+            <h4 className="movie__genre">{ config.genre }</h4>
             <div>
                 <span className="movie__year">{ config.year }</span>
                 <span className="movie__length">{ config.length }</span>
