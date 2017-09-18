@@ -38,17 +38,11 @@ module.exports = {
                 ],
             },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            camelCase: true,
-                            localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                        },
-                    }
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    { loader: 'sass-loader' }
                 ]
             }
         ]

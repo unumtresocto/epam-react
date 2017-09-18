@@ -1,0 +1,21 @@
+.button {
+    @include button();
+
+    &--primary {
+        background-color: $primary-color;
+
+        &:focus,
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+
+    &--secondary {
+        background-color: $secondary-color;
+
+        &:focus,
+        &:hover {
+            background-color: darken($secondary-color, 10%);
+        }
+    }
+}

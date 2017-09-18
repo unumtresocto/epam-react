@@ -1,0 +1,15 @@
+.search-results {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    &__movie {
+        margin: 16px;
+        flex: 0 0;
+    }
+
+    &:after {
+        content: none;
+    }
+
+}

@@ -1,0 +1,30 @@
+.movie-preview {
+    display: flex;
+    flex-direction: column;
+
+    &__footer {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__name {
+        font-size: 2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    &__genre {
+        color: $secondary-color;
+        font-size: 1.2rem;
+    }
+
+    &__year {
+        margin: 0;
+        padding: 0 4px;
+        font-size: 1.2rem;
+        line-height: 1.5;
+        border: 1px solid $primary-black;
+    }
+}
