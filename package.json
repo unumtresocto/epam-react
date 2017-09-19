@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --config webpack.config.js --watch --color",
-    "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "dev-server": "NODE_ENV=development webpack-dev-server --color --content-base build/"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js ",
+    "dev-server": "cross-env NODE_ENV=development webpack-dev-server --color --content-base build/ "
   },
   "repository": {
     "type": "git",
