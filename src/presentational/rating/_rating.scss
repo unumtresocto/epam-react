@@ -1,0 +1,17 @@
+$rating-color--good: green;
+
+.rating {
+    border: 2px solid;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: normal;
+    line-height: 3.6rem;
+    text-align: center;
+    width: 4rem;
+    height: 4rem;
+
+    &--good {
+        border-color: $rating-color--good;
+        color: $rating-color--good;
+    }
+}

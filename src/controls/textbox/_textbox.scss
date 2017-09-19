@@ -1,0 +1,15 @@
+.textbox[type="text"] {
+    background-color: $primary-black;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid $primary-white;
+    color: $primary-white;
+    font-size: 1.6rem;
+    outline: none;
+    padding: 16px 24px;
+
+    &:focus,
+    &:hover {
+        border-color: $primary-color;
+    }
+}

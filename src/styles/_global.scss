@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font-size: 1.4rem;
+    color: $primary-black;
+}
+
+.primary {
+    position: relative;
+    background-image: url(http://s3-us-west-2.amazonaws.com/techvibes/wp-content/uploads/2017/04/24135159/Netflix-Background.jpg);
+    overflow-x: hidden;
+
+    &::before {
+        content: '';
+        height: 100%;
+        width: 200%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-color: rgba($primary-black, 0.8);
+    }
+}
