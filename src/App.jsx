@@ -1,5 +1,10 @@
 import React from 'react';
-import style from './index.scss'
+import {
+    Route,
+    Link
+} from 'react-router-dom';
+
+import style from './index.scss';
 
 import Search from './containers/search/search';
 import SearchResults from './containers/search-results/search-results';
@@ -46,7 +51,7 @@ export default class App extends React.Component {
                     <div className="container">
 
                         <Header/>
-                        <Search className="header__search" onSearchClick={ () => this.search() }/>
+                        <Search className="header__search" onSearchClick={ () => null }/>
                         { this.state.movieConfigStub ? <Movie config={ this.state.movieConfigStub }/> : null }
 
                     </div>
@@ -54,7 +59,7 @@ export default class App extends React.Component {
                 <section className="secondary">
                     <div className="container">
 
-                        <SearchResults/>
+                            <Route path={`/search/:query`} component={ SearchResults }/>
 
                     </div>
                 </section>

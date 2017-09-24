@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import MoviePreview from '../../presentational/movie-preview/movie-preview.jsx';
 
 export default class SearchResults extends React.Component {
@@ -23,8 +25,12 @@ export default class SearchResults extends React.Component {
             <div className="search-results">
                 {
                     this.searchResultStub.map((item, i) => (
-                        <MoviePreview key={ i } config={ item }
-                                      className="search-results__movie"/>
+
+                        <Link key={ i } to="/search/Attack%20on%20titan">
+                            <MoviePreview config={ item }
+                                          className="search-results__movie"/>
+                        </Link>
+
                         )
                     )
                 }
