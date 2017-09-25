@@ -21,7 +21,8 @@ module.exports = {
     },
 
     output: {
-        path: path.join(__dirname, "build"),
+        path: path.join(__dirname, "/build"),
+        publicPath: '/',
         filename: '[name].js',
     },
 
@@ -31,6 +32,7 @@ module.exports = {
 
     devServer: {
         historyApiFallback: true,
+        contentBase: false,
         hot: true,
         port: 3000
     },

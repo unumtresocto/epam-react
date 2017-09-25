@@ -1,7 +1,9 @@
 import React from 'react';
 import {
     Route,
-    Link
+    Link,
+    Redirect,
+    Switch
 } from 'react-router-dom';
 
 import style from './index.scss';
@@ -17,12 +19,6 @@ export default class App extends React.Component {
         super();
 
         this.state = {
-            movieConfigStub: undefined
-        };
-    }
-
-    search() {
-        this.setState({
             movieConfigStub: {
                 coverLink: 'http://netflixroulette.net/api/posters/880640.jpg',
                 title: 'Pulp Fiction',
@@ -40,26 +36,40 @@ export default class App extends React.Component {
                         'Tim Roth', 'Amanda Plummer', 'Ving Rhames', 'Eric Stoltz', 'Maria de Medeiros'
                     ]
             }
-        });
+        };
     }
 
     render() {
 
         return (
-            <div>
+            <div className="app-root">
                 <section className="primary">
                     <div className="container">
 
                         <Header/>
                         <Search className="header__search" onSearchClick={ () => null }/>
-                        { this.state.movieConfigStub ? <Movie config={ this.state.movieConfigStub }/> : null }
 
                     </div>
                 </section>
                 <section className="secondary">
                     <div className="container">
 
-                            <Route path={`/search/:query`} component={ SearchResults }/>
+                        <Switch>
+                            <Route exact path={'/'} render={ () => (
+                                    <h3>NO DATA FOUND</h3>
+                                )}/>
+
+                            <Route path={'/search/:query'} component={ SearchResults }/>
+
+                            <Route path={'/film/:movie'} render={() => (
+                                <Movie config={ this.state.movieConfigStub }/>
+                            )}/>
+                            <Route render={() => (
+                                <Redirect to={{
+                                    pathname: '/'
+                                }}/>
+                            )}/>                            
+                        </Switch>
 
                     </div>
                 </section>
