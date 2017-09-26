@@ -10,6 +10,7 @@ import style from './index.scss';
 
 import Search from './containers/search/search';
 import SearchResults from './containers/search-results/search-results';
+import SuggestedMovies from './containers/suggested-movies/suggested-movies';
 import Header from './presentational/header/header';
 import Footer from './presentational/footer/footer';
 import Movie from './presentational/movie/movie';
@@ -26,9 +27,9 @@ export default class App extends React.Component {
                 rating: 4.1,
                 genre: 'Oscar-winning movies',
                 length: '154 min',
-                description: "Weaving together three stories featuring a burger-loving" +
-                             "hit man, his philosophical partner and a washed-up boxer, Quentin Tarantino" +
-                             "influenced a generation of filmmakers with this crime caper's stylized," +
+                description: "Weaving together three stories featuring a burger-loving " +
+                             "hit man, his philosophical partner and a washed-up boxer, Quentin Tarantino " +
+                             "influenced a generation of filmmakers with this crime caper's stylized, " +
                              "over-the-top violence and dark comic spirit.",
                 director: 'Quentin Tarantino',
                 cast: [
@@ -47,29 +48,32 @@ export default class App extends React.Component {
                     <div className="container">
 
                         <Header/>
-                        <Search className="header__search" onSearchClick={ () => null }/>
+
+                        <Switch>
+                            <Route path={'/film/:movie'} render={() => (
+                                <Movie config={ this.state.movieConfigStub }/>
+                            )}/>
+                            <Route render={() => (
+                                <Search className="header__search" onSearchClick={ () => null }/>
+                            )}/>
+                        </Switch>
 
                     </div>
                 </section>
                 <section className="secondary">
                     <div className="container">
 
-                        <Switch>
                             <Route exact path={'/'} render={ () => (
-                                    <h3>NO DATA FOUND</h3>
-                                )}/>
+                                <h3>NO DATA FOUND</h3>
+                            )}/>
 
                             <Route path={'/search/:query'} component={ SearchResults }/>
-
-                            <Route path={'/film/:movie'} render={() => (
-                                <Movie config={ this.state.movieConfigStub }/>
-                            )}/>
+                            <Route path={'/film/:movie'} component={ SuggestedMovies }/>
                             <Route render={() => (
                                 <Redirect to={{
                                     pathname: '/'
                                 }}/>
-                            )}/>                            
-                        </Switch>
+                            )}/>
 
                     </div>
                 </section>

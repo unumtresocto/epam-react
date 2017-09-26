@@ -22,7 +22,10 @@ export default class SearchResults extends React.Component {
 
     render() {
         return (
-            <MoviesList className="seach-results__movies-list" movies={ this.searchResultStub }/>
+            <div className="search-results">
+                <div>Sort by section placeholder</div>
+                <MoviesList className="seach-results__movies-list" movies={ this.searchResultStub }/>
+            </div>
         )
     }
 }

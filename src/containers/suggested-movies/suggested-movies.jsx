@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import MoviePreview from '../../presentational/movie-preview/movie-preview.jsx';
+import MoviesList from '../../presentational/movies-list/movies-list';
 
 export default class SuggestedMovies extends React.Component {
     constructor() {
@@ -23,17 +23,8 @@ export default class SuggestedMovies extends React.Component {
     render() {
         return (
             <div className="suggested-movies">
-                {
-                    this.searchResultStub.map((item, i) => (
-
-                        <Link key={ i } to="/film/Attack%20on%20titan">
-                            <MoviePreview config={ item }
-                                          className="search-results__movie"/>
-                        </Link>
-
-                        )
-                    )
-                }
+                <div>Films by Quentin Tarantino section placeholder</div>
+                <MoviesList className="suggested-movies__movies-list" movies={ this.searchResultStub }/>
             </div>
         )
     }
