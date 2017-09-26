@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import MoviesList from '../../presentational/movies-list/movies-list.jsx';
+import MoviesList from '../../presentational/movies-list/movies-list';
 
-export default class SearchResults extends React.Component {
+export default class SuggestedMovies extends React.Component {
     constructor() {
         super();
 
@@ -15,16 +15,16 @@ export default class SearchResults extends React.Component {
         }
 
         this.searchResultStub = [];
-        for (let i = 0; i < 10; i ++) {
+        for (let i = 0; i < 5; i ++) {
             this.searchResultStub.push(this.searchResultStubSample);
         }
     }
 
     render() {
         return (
-            <div className="search-results">
-                <div>Sort by section placeholder</div>
-                <MoviesList className="seach-results__movies-list" movies={ this.searchResultStub }/>
+            <div className="suggested-movies">
+                <div>Films by Quentin Tarantino section placeholder</div>
+                <MoviesList className="suggested-movies__movies-list" movies={ this.searchResultStub }/>
             </div>
         )
     }

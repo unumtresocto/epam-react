@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import Textbox from '../../controls/textbox/textbox';
 import Tumbler from '../../controls/tumbler/tumbler';
 import Button from '../../controls/button/button';
@@ -44,7 +46,9 @@ export default class Search extends React.Component {
 
                     </div>
 
-                    <Button caption="Search" onClick={ this.props.onSearchClick } className="controls__search button--primary"/>
+                    <Link to="/search/Search%20Query">
+                        <Button caption="Search" onClick={ this.props.onSearchClick } className="controls__search button--primary"/>
+                    </Link>
 
                 </div>
 
