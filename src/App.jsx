@@ -14,6 +14,7 @@ import SuggestedMovies from './containers/suggested-movies/suggested-movies';
 import Header from './presentational/header/header';
 import Footer from './presentational/footer/footer';
 import Movie from './presentational/movie/movie';
+import CTF from './ctf/ctf';
 
 export default class App extends React.Component {
     constructor() {
@@ -64,7 +65,7 @@ export default class App extends React.Component {
                     <div className="container">
 
                             <Route exact path={'/'} render={ () => (
-                                <h3>NO DATA FOUND</h3>
+                                <CTF></CTF>
                             )}/>
 
                             <Route path={'/search/:query'} component={ SearchResults }/>
