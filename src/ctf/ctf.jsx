@@ -42,7 +42,7 @@ export default class CTF extends React.Component {
         this.socket.on('connect', () => console.log('connected succesfully'));
         this.socket.on('status', (data) => this.updateStatus(data));
         this.socket.on('error_message', (data) => this.handleInvalidMove(data));
-        this.socket.on('message', (data) => console.log(data));
+        this.socket.on('message', (data) => console.log('Flag is here: ' + data));
         this.socket.on('disconnect', () => console.log('connection lost'));
     }
 
