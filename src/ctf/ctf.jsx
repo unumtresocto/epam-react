@@ -13,13 +13,19 @@ export default class CTF extends React.Component {
         for (let i = 0; i < 20; i ++) {
             mapConfig.push([]);
             for (let j = 0; j < 20; j ++) {
-                mapConfig[i].push({ type: 'd' });
+                mapConfig[i].push({
+                    player: false,
+                    walls: {
+                        right: false,
+                        bottom: false
+                    }
+                });
             }
         }
 
         this.state = {
             status: '',
-            lastMove: undefined,
+            lastMoveDirection: undefined,
             mapConfig: mapConfig
         }
 
@@ -31,12 +37,44 @@ export default class CTF extends React.Component {
         this.socket.on('disconnect', () => console.log('connection lost'));
     }
 
+    resetMap() {
+        const mapConfig = [];
+
+        for (let i = 0; i < 20; i ++) {
+            mapConfig.push([]);
+            for (let j = 0; j < 20; j ++) {
+                mapConfig[i].push({
+                    player: false,
+                    walls: {
+                        right: false,
+                        bottom: false
+                    }
+                });
+            }
+        }
+
+        this.setState({
+            ...this.state,
+            mapConfig: mapConfig
+        })
+    }
+
+    keyDownHandler(e) {
+        switch(e.key) {
+            case 'ArrowDown': this.move(3); break;
+            case 'ArrowUp': this.move(1); break;
+            case 'ArrowLeft': this.move(2); break;
+            case 'ArrowRight': this.move(4); break;
+        }
+    }
+
     updateStatus(status) {
         console.log(status);
         if (typeof status == "string") {
             status = JSON.parse(status);
         }
-        this.state.mapConfig[status.pos.x][status.pos.y].type = '';
+
+        this.state.mapConfig[status.pos.x][status.pos.y].player = true;
 
         this.setState({
             ...this.state,
@@ -50,23 +88,23 @@ export default class CTF extends React.Component {
         let x = this.state.status.pos.x;
         let y = this.state.status.pos.y;
 
-        switch (this.state.lastMove) {
-            case 1: x--; break;
-            case 2: y--; break;
-            case 3: x++; break;
-            case 4: y++; break;
-        }
+        this.state.mapConfig[this.state.status.pos.x][this.state.status.pos.y].player = true;
 
-        if(x >= 0 && y >= 0) {
-            this.state.mapConfig[x][y].type = 'x';
+        switch (this.state.lastMoveDirection) {
+            case 1: this.state.mapConfig[x-1][y].walls.bottom = true; break;
+            case 2: this.state.mapConfig[x][y-1].walls.right = true; break;
+            case 3: this.state.mapConfig[x][y].walls.bottom = true; break;
+            case 4: this.state.mapConfig[x][y].walls.right = true; break;
         }
 
         this.setState({ ...this.state });
     }
 
     move(direction) {
+        this.state.mapConfig[this.state.status.pos.x][this.state.status.pos.y].player = false;
+
         this.setState({
-            ...this.state, lastMove: direction
+            ...this.state, lastMoveDirection: direction
         });
 
         this.socket.emit('action', {
@@ -78,9 +116,9 @@ export default class CTF extends React.Component {
     render() {
         return (
             <div className="CTF">
-                <h2>Debug</h2>
+                <input onKeyDown={ this.keyDownHandler.bind(this) }></input>
                 <div>
-                    { this.state.lastMove }
+                    { this.state.lastMoveDirection }
                 </div>
                 <div className="ctf-controls">
                     <div className="ctf-button" onClick={ this.move.bind(this, 4) }>RIGHT</div>

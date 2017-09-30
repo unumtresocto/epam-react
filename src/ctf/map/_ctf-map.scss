@@ -8,7 +8,9 @@
     &__cell {
         height: 20px;
         width: 20px;
-        border: 1px solid gray;
+        border: 2px solid gray;
+        border-top: none;
+        border-left: none;
         display: flex;
         justify-content: center;
         align-items: center;
