@@ -8,19 +8,22 @@ export default class CTF extends React.Component {
     constructor() {
         super();
 
-        const mapConfig = [];
+        const mapConfigs = [];
 
-        for (let i = 0; i < 20; i ++) {
-            mapConfig.push([]);
-            for (let j = 0; j < 20; j ++) {
-                mapConfig[i].push({
-                    player: false,
-                    visited: false,
-                    walls: {
-                        right: false,
-                        bottom: false
-                    }
-                });
+        for (let k = 0; k < 5; k ++) {
+            mapConfigs.push([]);
+            for (let i = 0; i < 20; i ++) {
+                mapConfigs[k].push([]);
+                for (let j = 0; j < 20; j ++) {
+                    mapConfigs[k][i].push({
+                        player: false,
+                        visited: false,
+                        walls: {
+                            right: false,
+                            bottom: false
+                        }
+                    });
+                }
             }
         }
 
@@ -31,7 +34,7 @@ export default class CTF extends React.Component {
                 x: 0,
                 y: 0
             },
-            mapConfig: mapConfig,
+            mapConfigs: mapConfigs,
             currentLevel: 0
         }
 
@@ -43,35 +46,20 @@ export default class CTF extends React.Component {
         this.socket.on('disconnect', () => console.log('connection lost'));
     }
 
-    resetMap() {
-        const mapConfig = [];
-
-        for (let i = 0; i < 20; i ++) {
-            mapConfig.push([]);
-            for (let j = 0; j < 20; j ++) {
-                mapConfig[i].push({
-                    player: false,
-                    walls: {
-                        right: false,
-                        bottom: false
-                    }
-                });
-            }
-        }
-
-        this.setState({
-            ...this.state,
-            mapConfig: mapConfig
-        })
+    getCurrentMap() {
+        return this.state.mapConfigs[this.state.currentLevel];
     }
 
-    updatePlayerOnMap() {
-        const mapConfig = this.state.mapConfig;
-        mapConfig[this.state.playerCoordinates.x][this.state.playerCoordinates.y].player = true;
+    updatePlayer() {
+        const mapConfig = this.getCurrentMap();
+        mapConfig[this.state.status.pos.x][this.state.status.pos.y].player = true;
 
         this.setState({
             ...this.state,
-            mapConfig: mapConfig
+            playerCoordinates: {
+                x: this.state.status.pos.x,
+                y: this.state.status.pos.y
+            }
         })
     }
 
@@ -90,21 +78,13 @@ export default class CTF extends React.Component {
             status = JSON.parse(status);
         }
 
-        if (this.state.currentLevel !== status.level) {
-            this.resetMap();
-        }
-
         this.setState({
             ...this.state,
             status: status,
             currentLevel: status.level,
-            playerCoordinates: {
-                x: status.pos.x,
-                y: status.pos.y
-            }
         });
 
-        this.updatePlayerOnMap();
+        this.updatePlayer();
     }
 
     handleInvalidMove(data) {
@@ -113,21 +93,23 @@ export default class CTF extends React.Component {
         let x = this.state.status.pos.x;
         let y = this.state.status.pos.y;
 
-        this.state.mapConfig[this.state.status.pos.x][this.state.status.pos.y].player = true;
+        const map = this.getCurrentMap();
+
+        map[this.state.status.pos.x][this.state.status.pos.y].player = true;
 
         switch (this.state.lastMoveDirection) {
-            case 1: this.state.mapConfig[x-1][y].walls.bottom = true; break;
-            case 2: this.state.mapConfig[x][y-1].walls.right = true; break;
-            case 3: this.state.mapConfig[x][y].walls.bottom = true; break;
-            case 4: this.state.mapConfig[x][y].walls.right = true; break;
+            case 1: map[x-1][y].walls.bottom = true; break;
+            case 2: map[x][y-1].walls.right = true; break;
+            case 3: map[x][y].walls.bottom = true; break;
+            case 4: map[x][y].walls.right = true; break;
         }
 
         this.setState({ ...this.state });
     }
 
     move(direction) {
-        this.state.mapConfig[this.state.playerCoordinates.x][this.state.playerCoordinates.y].player = false;
-        this.state.mapConfig[this.state.playerCoordinates.x][this.state.playerCoordinates.y].visited = true;
+        this.getCurrentMap()[this.state.playerCoordinates.x][this.state.playerCoordinates.y].player = false;
+        this.getCurrentMap()[this.state.playerCoordinates.x][this.state.playerCoordinates.y].visited = true;
 
         this.setState({
             ...this.state,
@@ -154,7 +136,7 @@ export default class CTF extends React.Component {
                     <div className="ctf-button" onClick={ this.move.bind(this, 3) }>DOWN</div>
                 </div>
 
-                <CTFMap config={ this.state.mapConfig }></CTFMap>
+                <CTFMap config={ this.getCurrentMap() }></CTFMap>
             </div>
         )
     }
