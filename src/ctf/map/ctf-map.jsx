@@ -8,7 +8,7 @@ export default class CTFMap extends React.Component {
 
     render() {
         return (
-            <div className="ctf-map" onKeyDown={ this.props.keyDownHandler }>
+            <div className="ctf-map">
                 { this.props.config.map((row, i) => (
                     <div className="ctf-map__row" key={ i }>
                         { row.map((cell, j) => (

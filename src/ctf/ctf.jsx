@@ -15,6 +15,7 @@ export default class CTF extends React.Component {
             for (let j = 0; j < 20; j ++) {
                 mapConfig[i].push({
                     player: false,
+                    visited: false,
                     walls: {
                         right: false,
                         bottom: false
@@ -26,7 +27,12 @@ export default class CTF extends React.Component {
         this.state = {
             status: '',
             lastMoveDirection: undefined,
-            mapConfig: mapConfig
+            playerCoordinates: {
+                x: 0,
+                y: 0
+            },
+            mapConfig: mapConfig,
+            currentLevel: 0
         }
 
         this.socket = io('45.76.95.55:8031');
@@ -59,6 +65,16 @@ export default class CTF extends React.Component {
         })
     }
 
+    updatePlayerOnMap() {
+        const mapConfig = this.state.mapConfig;
+        mapConfig[this.state.playerCoordinates.x][this.state.playerCoordinates.y].player = true;
+
+        this.setState({
+            ...this.state,
+            mapConfig: mapConfig
+        })
+    }
+
     keyDownHandler(e) {
         switch(e.key) {
             case 'ArrowDown': this.move(3); break;
@@ -74,12 +90,21 @@ export default class CTF extends React.Component {
             status = JSON.parse(status);
         }
 
-        this.state.mapConfig[status.pos.x][status.pos.y].player = true;
+        if (this.state.currentLevel !== status.level) {
+            this.resetMap();
+        }
 
         this.setState({
             ...this.state,
-            status: status
+            status: status,
+            currentLevel: status.level,
+            playerCoordinates: {
+                x: status.pos.x,
+                y: status.pos.y
+            }
         });
+
+        this.updatePlayerOnMap();
     }
 
     handleInvalidMove(data) {
@@ -101,10 +126,12 @@ export default class CTF extends React.Component {
     }
 
     move(direction) {
-        this.state.mapConfig[this.state.status.pos.x][this.state.status.pos.y].player = false;
+        this.state.mapConfig[this.state.playerCoordinates.x][this.state.playerCoordinates.y].player = false;
+        this.state.mapConfig[this.state.playerCoordinates.x][this.state.playerCoordinates.y].visited = true;
 
         this.setState({
-            ...this.state, lastMoveDirection: direction
+            ...this.state,
+            lastMoveDirection: direction
         });
 
         this.socket.emit('action', {
