@@ -8,9 +8,9 @@ import {
 
 import style from './index.scss';
 
-import Search from './containers/search/search';
 import SearchResults from './containers/search-results/search-results';
 import SuggestedMovies from './containers/suggested-movies/suggested-movies';
+import Search from './presentational/search/search';
 import Header from './presentational/header/header';
 import Footer from './presentational/footer/footer';
 import Movie from './presentational/movie/movie';
@@ -54,7 +54,7 @@ export default class App extends React.Component {
                                 <Movie config={ this.state.movieConfigStub }/>
                             )}/>
                             <Route render={() => (
-                                <Search className="header__search" onSearchClick={ () => null }/>
+                                <Search className="header__search"/>
                             )}/>
                         </Switch>
 
