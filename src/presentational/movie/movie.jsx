@@ -8,16 +8,16 @@ const Movie = ({ className, config }) => (
         <section className="movie__details">
             <h2 className="movie__name">
                 { config.title }
-                <Rating className="movie__rating rating--good" rating={ config.rating }/>
+                <Rating className="movie__rating" rating={ config.vote_average }/>
             </h2>
             <h4 className="movie__genre">{ config.genre }</h4>
             <div>
                 <span className="movie__year">{ config.year }</span>
                 <span className="movie__length">{ config.length }</span>
             </div>
-            <p className="movie__description">{ config.description }</p>
+            <p className="movie__description">{ config.overview }</p>
             <p className="movie__director">Director: { config.director }</p>
-            <p className="movie__cast">Cast: { config.cast.join(', ') }</p>
+             <p className="movie__cast">Cast: { config.cast }</p>
         </section>
     </main>
 );

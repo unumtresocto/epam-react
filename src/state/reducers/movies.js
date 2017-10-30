@@ -1,18 +1,26 @@
-const movies = (state = {}, action) => {
+const movies = (state = { searchResults: [], currentMovie: undefined }, action) => {
   switch (action.type) {
-    case 'SEARCH_MOVIE':
-      return {
-
-      }
-    case 'SELECT_CURRENT_MOVIE':
-      return state.map(todo =>
-        (todo.id === action.id)
-          ? {...todo, completed: !todo.completed}
-          : todo
-      )
+    case 'SET_MOVIES':
+        return {
+            ...state,
+            searchResults: action.payload.map(item => {
+                return {
+                    ...item,
+                    coverLink: `${POSTER_BASE_URL}/${item.poster_path}`,
+                    year: new Date(item.release_date).getFullYear()
+                }
+            })
+        }
+    case 'SELECT_MOVIE':
+        return {
+            ...state,
+            currentMovie: state.searchResults.find(item => item.id === action.payload)
+        }
     default:
-      return state
-  }
+        return state
+    }
 }
 
 export default movies
+
+const POSTER_BASE_URL = 'http://image.tmdb.org/t/p/w185';

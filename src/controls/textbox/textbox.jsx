@@ -1,7 +1,30 @@
 import React from 'react';
 
-const Textbox = ({ defaultValue = '', className }) => (
-    <input className={ "textbox " + className } type="text"/>
-)
+export default class Textbox extends React.Component {
+    constructor(props) {
+        super(props);
 
-export default Textbox;
+        this.state = {
+            value: this.props.defaultValue || ''
+        }
+    }
+
+    onChange(e) {
+        this.setState({
+            value: e.target.value
+        })
+
+        if (this.props.onChange) {
+            this.props.onChange();
+        }
+    }
+
+    render() {
+        return (
+            <input className={ "textbox " + this.props.className }
+                   type="text"
+                   value={ this.props.defaultValue }
+                   onChange={ (e) => this.onChange(e) } />
+        );
+    }
+};

@@ -13,36 +13,34 @@ let Search = ({ dispatch, className }) => {
 
     return (
         <div className={ "search " + className }>
-
             <h2 className="search__heading">
                 Find your movie
             </h2>
-
-            // <Textbox className="search__textbox"/>
-            <input
-                ref={ node => {
-                    input = node
-                } }
-            />
+            <Textbox
+                className="search__textbox"
+                onChange={ e => console.log(e) }
+                ref={ textbox => input = textbox }/>
 
             <div className="search__controls controls">
                 <div className="controls__search-by search-by">
                     Search by
                 </div>
+                <Link to="/search/Search%20Query">
+                    <Button
+                        caption="Search"
+                        onClick={
+                            e => {
+                                if (!input.state.value.trim()) {
+                                    return
+                                }
+                                dispatch(searchMovie(input.state.value))
 
-                <Button caption="Search" onClick={
-                        e => {
-                                 if (!input.value.trim()) {
-                                     return
-                                 }
-                                 dispatch(searchMovie(input.value))
-
-                                 input.value = ''
-                             }
-                     } className="controls__search button--primary"/>
-
+                                input.state.value = ''
+                            }
+                        }
+                        className="controls__search button--primary"/>
+                </Link>
             </div>
-
         </div>
     );
 }

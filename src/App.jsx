@@ -8,12 +8,12 @@ import {
 
 import style from './index.scss';
 
-import SearchResults from './containers/search-results/search-results';
-import SuggestedMovies from './containers/suggested-movies/suggested-movies';
-import Search from './presentational/search/search';
+import SearchResultsContainer from './containers/search-results/search-results-container';
+import SuggestedMovies from './containers/suggested-movies/suggested-movies-container';
+import MovieContainer from './containers/movie/movie-container';
+import Search from './containers/search/search';
 import Header from './presentational/header/header';
 import Footer from './presentational/footer/footer';
-import Movie from './presentational/movie/movie';
 
 export default class App extends React.Component {
     constructor() {
@@ -50,8 +50,8 @@ export default class App extends React.Component {
                         <Header/>
 
                         <Switch>
-                            <Route path={'/film/:movie'} render={() => (
-                                <Movie config={ this.state.movieConfigStub }/>
+                            <Route path={'/film/:id'} render={() => (
+                                <MovieContainer/>
                             )}/>
                             <Route render={() => (
                                 <Search className="header__search"/>
@@ -63,17 +63,19 @@ export default class App extends React.Component {
                 <section className="secondary">
                     <div className="container">
 
+                        <Switch>
                             <Route exact path={'/'} render={ () => (
                                 <h3>NO DATA FOUND</h3>
                             )}/>
 
-                            <Route path={'/search/:query'} component={ SearchResults }/>
-                            <Route path={'/film/:movie'} component={ SuggestedMovies }/>
+                            <Route path={'/search/:query'} component={ SearchResultsContainer }/>
+                            <Route path={'/film/:id'} component={ SuggestedMovies }/>
                             <Route render={() => (
                                 <Redirect to={{
                                     pathname: '/'
                                 }}/>
                             )}/>
+                        </Switch>
 
                     </div>
                 </section>

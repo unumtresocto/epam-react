@@ -1,12 +1,12 @@
 export const searchMovie = query => {
     return dispatch => searchMovies(query)
-                            .then(
-                                response => response.json(),
-                                error => console.error(error)
-                            )
-                            .then(
-                                data => dispatch(setMovies(data.results))
-                            );
+        .then(
+            response => response.json(),
+            error => console.error(error)
+        )
+        .then(
+            data => dispatch(setMovies(data.results))
+        );
 }
 
 export const setMovies = movies => {
@@ -18,7 +18,7 @@ export const setMovies = movies => {
 
 export const selectCurrentMovie = id => {
     return {
-        type: 'SELECT_CURRENT_MOVIE',
+        type: 'SELECT_MOVIE',
         payload: id
     };
 }
