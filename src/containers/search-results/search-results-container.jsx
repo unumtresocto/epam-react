@@ -6,7 +6,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         movies: state.movies.searchResults
     }
-}
+};
 
 const SearchResultsContainer = connect(
     mapStateToProps

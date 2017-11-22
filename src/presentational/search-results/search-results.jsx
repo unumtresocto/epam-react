@@ -7,6 +7,6 @@ const SearchResults = ({ movies }) => (
         <div>Sort by section placeholder</div>
         <MoviesListContainer className="seach-results__movies-list" movies={ movies }/>
     </div>
-)
+);
 
 export default SearchResults;
