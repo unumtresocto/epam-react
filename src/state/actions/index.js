@@ -16,7 +16,7 @@ export const setMovies = movies => {
     }
 };
 
-export const selectCurrentMovie = (id, data) => {
+export const selectCurrentMovie = (data) => {
     return {
         type: 'SELECT_MOVIE',
         payload: data

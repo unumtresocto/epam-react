@@ -2,9 +2,9 @@ import React from 'react';
 
 import Rating from '../rating/rating';
 
-const Movie = ({ className, config }) => ({
-    return config && (<main className={ "movie " + className }>
-        <img className="movie__cover" src={ 'https://placehold.it/150x300' } alt=""/>
+const Movie = ({ className, config }) => (
+    config ? <main className={ "movie " + className }>
+        <img className="movie__cover" src={ 'https://placehold.it/150x300'} alt=""/>
         <section className="movie__details">
             <h2 className="movie__name">
                 { config.original_title }
@@ -16,10 +16,10 @@ const Movie = ({ className, config }) => ({
                 <span className="movie__length">{ config.runtime }</span>
             </div>
             <p className="movie__description">{ config.overview }</p>
-            { /*<p className="movie__director">Director: { config.director }</p>*/ }
-            { /*<p className="movie__cast">Cast: { config.cast }</p>*/ }
+            {/*<p className="movie__director">Director: { config.director }</p>*/}
+            {/*<p className="movie__cast">Cast: { config.cast }</p>*/}
         </section>
-    </main>);
-});
+    </main> : null
+);
 
 export default Movie;
