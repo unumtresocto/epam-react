@@ -3,7 +3,7 @@ import MoviesListContainer from '../../containers/movies-list/movies-list-contai
 
 const SuggestedMovies = ({ movies }) => (
     <div className="suggested-movies">
-        <div>Films by Quentin Tarantino section placeholder</div>
+        {/*<div>Films by Quentin Tarantino section placeholder</div>*/}
         <MoviesListContainer className="suggested-movies__movies-list" movies={ movies }/>
     </div>
 );

@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux'
-import { searchMovie } from '../../state/actions';
+import { searchMovies } from '../../state/actions';
 
 import Textbox from '../../controls/textbox/textbox';
-import Tumbler from '../../controls/tumbler/tumbler';
 import Button from '../../controls/button/button';
 
 let Search = ({ dispatch, className }) => {
@@ -30,10 +29,10 @@ let Search = ({ dispatch, className }) => {
                         caption="Search"
                         onClick={
                             e => {
-                                if (!input.state.value.trim()) {
+                                if (! input.state.value.trim()) {
                                     return
                                 }
-                                dispatch(searchMovie(input.state.value))
+                                dispatch(searchMovies(input.state.value));
 
                                 input.state.value = ''
                             }
@@ -43,7 +42,8 @@ let Search = ({ dispatch, className }) => {
             </div>
         </div>
     );
-}
-Search = connect()(Search)
+};
+
+Search = connect()(Search);
 
 export default Search;

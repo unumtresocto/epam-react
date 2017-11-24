@@ -4,7 +4,7 @@ import MoviesListContainer from '../../containers/movies-list/movies-list-contai
 
 const SearchResults = ({ movies }) => (
     <div className="search-results">
-        <div>Sort by section placeholder</div>
+        {/*<div>Sort by section placeholder</div>*/}
         <MoviesListContainer className="seach-results__movies-list" movies={ movies }/>
     </div>
 );

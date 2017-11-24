@@ -48,7 +48,7 @@ export default class App extends React.Component {
                             ) }/>
 
                             <Route path={ '/search/:query' } component={ SearchResultsContainer }/>
-                            <Route path={ '/film/:id' } component={ SuggestedMovies }/>
+                            <Route path={ '/film/:id' } component={ null }/>
                             <Route render={ () => (
                                 <Redirect to={ {
                                     pathname: '/'
