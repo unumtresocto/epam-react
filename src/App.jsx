@@ -5,8 +5,6 @@ import {
     Switch
 } from 'react-router-dom';
 
-import style from './index.scss';
-
 import SearchResultsContainer from './containers/search-results/search-results-container';
 import SuggestedMovies from './containers/suggested-movies/suggested-movies-container';
 import MovieContainer from './containers/movie/movie-container';
@@ -29,7 +27,7 @@ export default class App extends React.Component {
                         <Header/>
 
                         <Switch>
-                            <Route path={ '/film/:id' } render={ () => (
+                            <Route path={ '/movie/:id' } render={ () => (
                                 <MovieContainer/>
                             ) }/>
                             <Route render={ () => (
@@ -43,17 +41,13 @@ export default class App extends React.Component {
                     <div className="container">
 
                         <Switch>
-                            <Route exact path={ '/' } render={ () => (
+                            <Route exact path="/" render={ () => (
                                 <h3>NO DATA FOUND</h3>
                             ) }/>
 
-                            <Route path={ '/search/:query' } component={ SearchResultsContainer }/>
-                            <Route path={ '/film/:id' } component={ null }/>
-                            <Route render={ () => (
-                                <Redirect to={ {
-                                    pathname: '/'
-                                } }/>
-                            ) }/>
+                            <Route path="/search/:query" component={ SearchResultsContainer }/>
+                            <Route path="/movie/:id" render={ () => null }/>
+                            <Redirect to="/"/>
                         </Switch>
 
                     </div>

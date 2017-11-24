@@ -8,7 +8,7 @@ const MoviesList = ({ className, movies, onMovieClick }) => (
         {
             movies.map((item, i) => (
 
-                    <NavLink key={ i } to={ `/film/${item.id}` }>
+                    <NavLink key={ i } to={ `/movie/${item.id}` }>
                         <MoviePreview config={ item }
                                       onClick={ () => onMovieClick(item.id) }
                                       className="movies-list__movie"/>

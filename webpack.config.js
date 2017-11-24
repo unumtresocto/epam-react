@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const extractSass = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css",
-    disable: process.env.NODE_ENV === "development"
+    filename: "[name].css",
+    disable: false
 });
 
 module.exports = {
@@ -14,8 +14,6 @@ module.exports = {
 
     entry: {
         app: [
-            'react-hot-loader/patch',
-            'webpack-dev-server/client?http://localhost:3000',
             './index.jsx',
         ]
     },
@@ -59,13 +57,13 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
-        new HtmlWebpackPlugin({
-            title: 'Test',
-            hash: true,
-            template: './index.html'
-        }),
+        // new webpack.HotModuleReplacementPlugin(),
+        // new webpack.NamedModulesPlugin(),
+        // new HtmlWebpackPlugin({
+        //     title: 'Test',
+        //     hash: true,
+        //     template: './index.html'
+        // }),
         extractSass
     ],
 };

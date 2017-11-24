@@ -21,9 +21,9 @@ let Search = ({ dispatch, className }) => {
                 ref={ textbox => input = textbox }/>
 
             <div className="search__controls controls">
-                <div className="controls__search-by search-by">
-                    Search by
-                </div>
+                {/*<div className="controls__search-by search-by">*/}
+                    {/*Search by*/}
+                {/*</div>*/}
                 <Link to="/search/Search%20Query">
                     <Button
                         caption="Search"

@@ -4,16 +4,13 @@ import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import netflixApp from './state/reducers/index';
+import configureStore from './state/configureStore';
 
 import App from './App';
+require('./index.scss');
 
-let store = createStore(
-    netflixApp,
-    applyMiddleware(thunk)
-);
+const store = configureStore(window.PRELOADED_STATE);
+delete window.PRELOADED_STATE;
 
 const render = () => {
     ReactDom.render(
@@ -32,10 +29,10 @@ const render = () => {
         </AppContainer>,
         document.getElementById('app')
     )
-}
+};
 
 render();
-
-if (module.hot) {
-    module.hot.accept('./App', render);
-}
+//
+// if (module.hot) {
+//     module.hot.accept('./App', render);
+// }
