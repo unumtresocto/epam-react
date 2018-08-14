@@ -46,7 +46,7 @@ export default class App extends React.Component {
             <div className="app-root">
                 <section className="primary">
                     <div className="container">
-
+                        Strashna Virubai
                         <Header/>
 
                         <Switch>
