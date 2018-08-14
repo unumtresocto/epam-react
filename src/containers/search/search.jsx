@@ -1,58 +1,49 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux'
+import { searchMovies } from '../../state/actions';
+
 import Textbox from '../../controls/textbox/textbox';
-import Tumbler from '../../controls/tumbler/tumbler';
 import Button from '../../controls/button/button';
 
-export default class Search extends React.Component {
+let Search = ({ dispatch, className }) => {
+    let input;
 
-    constructor(props) {
-        super(props);
+    return (
+        <div className={ "search " + className }>
+            <h2 className="search__heading">
+                Find your movie
+            </h2>
+            <Textbox
+                className="search__textbox"
+                onChange={ e => console.log(e) }
+                ref={ textbox => input = textbox }/>
 
-        this.state = {
-            tumblerStubConfig: {
-                name: 'searchCriteria',
-                config: [{
-                    id: 1,
-                    value: 'title',
-                    caption: 'Title'
-                }, {
-                    id: 2,
-                    value: 'director',
-                    caption: 'Director'
-                }]
-            }
-        }
-    }
+            <div className="search__controls controls">
+                {/*<div className="controls__search-by search-by">*/}
+                    {/*Search by*/}
+                {/*</div>*/}
+                <Link to="/search/Search%20Query">
+                    <Button
+                        caption="Search"
+                        onClick={
+                            e => {
+                                if (! input.state.value.trim()) {
+                                    return
+                                }
+                                dispatch(searchMovies(input.state.value));
 
-    render() {
-        return (
-            <div className={ "search " + this.props.className }>
-
-                <h2 className="search__heading">
-                    Find your movie
-                </h2>
-
-                <Textbox className="search__textbox"/>
-
-                <div className="search__controls controls">
-                    <div className="controls__search-by search-by">
-                        Search by
-
-                        <Tumbler className="search-by__tumbler"
-                                 name={ this.state.tumblerStubConfig.name }
-                                 config={ this.state.tumblerStubConfig.config }/>
-
-                    </div>
-
-                    <Link to="/search/Search%20Query">
-                        <Button caption="Search" onClick={ this.props.onSearchClick } className="controls__search button--primary"/>
-                    </Link>
-
-                </div>
-
+                                input.state.value = ''
+                            }
+                        }
+                        className="controls__search button--primary"/>
+                </Link>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
+
+Search = connect()(Search);
+
+export default Search;

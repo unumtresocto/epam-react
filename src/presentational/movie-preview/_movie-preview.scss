@@ -1,6 +1,12 @@
 .movie-preview {
     display: flex;
     flex-direction: column;
+    width: 185px;
+
+    &__cover {
+        width: 185px;
+        height: 278px;
+    }
 
     &__footer {
         margin-top: 8px;

@@ -16,10 +16,13 @@
 
         display: flex;
         align-content: center;
+        justify-content: space-between;
     }
 
     &__rating {
+        flex-shrink: 0;
         margin-left: 24px;
+        letter-spacing: normal;
     }
 
     &__genre {
